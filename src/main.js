@@ -7,6 +7,8 @@ var showRandomButton = document.querySelector('.random-cover-button')
 var makeNewButton = document.querySelector('.make-new-button')
 var mainCover = document.querySelector('.main-cover')
 var makeNewForm = document.querySelector('.form-view')
+var homeButton = document.querySelector('.home-button')
+var saveCoverButton = document.querySelector('.save-cover-button')
 
 
 // We've provided a few variables below
@@ -18,7 +20,8 @@ var currentCover;
 
 // Add your event listeners here 👇
 showRandomButton.addEventListener('click', showRandom)
-// makeNewButton.addEventListener('click', makeNew)
+makeNewButton.addEventListener('click', makeNew)
+homeButton.addEventListener('click', goHome)
 
 
 // // Create your event handlers and other functions here 👇
@@ -47,15 +50,26 @@ function showRandom() {
 
 
 
-  // mainCover.style.visibility = 'hidden'
-  // makeNewForm.style.visibility = 'visible'
-  // document.getElementbyClassName('.main-cover').hidden = true;
-  // document.getElementbyClassName('.view form-view').hidden = false;
-
-
 
 // We've provided one function to get you started
 function getRandomIndex(array) {
   return Math.floor(Math.random() * array.length);
+}
+
+function makeNew() {
+  mainCover.classList.add("hidden");
+  makeNewForm.classList.remove("hidden");
+  showRandomButton.classList.add("hidden");
+  homeButton.classList.remove('hidden');
+  saveCoverButton.classList.add('hidden');
+}
+
+function goHome() {
+  mainCover.classList.remove("hidden");
+  makeNewForm.classList.add("hidden");
+  showRandomButton.classList.remove("hidden");
+  homeButton.classList.add('hidden');
+  saveCoverButton.classList.remove('hidden');
+
 }
 showRandom()
