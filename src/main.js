@@ -12,7 +12,7 @@ var saveCoverButton = document.querySelector('.save-cover-button')
 var savePage = document.querySelector('.saved-view')
 var viewSaveButton = document.querySelector('.view-saved-button')
 var savedCoversSection = document.querySelector('.saved-covers-section')
-
+var createBookButton = document.querySelector('.create-new-book-button')
 
 
 // We've provided a few variables below
@@ -22,13 +22,14 @@ var savedCovers = [
 var currentCover;
 
 
+
 // Add your event listeners here 👇
 showRandomButton.addEventListener('click', showRandom)
 makeNewButton.addEventListener('click', makeNew)
 homeButton.addEventListener('click', goHome)
 saveCoverButton.addEventListener('click', goSave)
 viewSaveButton.addEventListener('click', goSave)
-
+createBookButton.addEventListener('click', createNew)
 // // Create your event handlers and other functions here 👇
 
 function showRandom() {
@@ -49,7 +50,8 @@ function showRandom() {
   coverTagline1.innerText = coverArray[2]
   coverTagline2.innerText = coverArray[3]
   console.log(randomCover)
-  return randomCover;
+  currentCover = randomCover
+  return randomCover
 }
 
 
@@ -86,6 +88,46 @@ function goSave() {
   homeButton.classList.remove('hidden');
   saveCoverButton.classList.remove('hidden');
 
+}
+
+function createNew() {
+  event.preventDefault()
+  var coverInput = document.getElementById('cover').value
+  var titleInput = document.getElementById('title').value
+  var descriptorInput1 = document.getElementById('descriptor1').value
+  var descriptorInput2 = document.getElementById('descriptor2').value
+
+  mainCover.classList.remove("hidden");
+  makeNewForm.classList.add("hidden");
+  showRandomButton.classList.remove("hidden");
+  homeButton.classList.add('hidden');
+  saveCoverButton.classList.remove('hidden');
+
+  coverImage.src = coverInput
+  coverTitle.innerText = titleInput
+  coverTagline1.innerText = descriptorInput1
+  coverTagline2.innerText = descriptorInput2
+
+  var userCover = new Cover(coverInput, titleInput, descriptorInput1, descriptorInput2)
+  var isDuplicate = false
+
+  if(covers.includes(coverInput) === false) {
+    covers.push(coverInput)
+  }
+  if(titles.includes(titleInput) === false) {
+    titles.push(titleInput)
+  }
+  if(descriptors.includes(descriptorInput1) === false) {
+    descriptors.push(descriptorInput1)
+  }
+  if(descriptors.includes(descriptorInput2) === false) {
+    descriptors.push(descriptorInput2)
+  }
+
+
+  console.log(userCover)
+  currentCover = userCover
+  return userCover
 }
 
 showRandom()
