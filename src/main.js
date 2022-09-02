@@ -9,6 +9,10 @@ var mainCover = document.querySelector('.main-cover')
 var makeNewForm = document.querySelector('.form-view')
 var homeButton = document.querySelector('.home-button')
 var saveCoverButton = document.querySelector('.save-cover-button')
+var savePage = document.querySelector('.saved-view')
+var viewSaveButton = document.querySelector('.view-saved-button')
+var savedCoversSection = document.querySelector('.saved-covers-section')
+
 
 
 // We've provided a few variables below
@@ -22,7 +26,8 @@ var currentCover;
 showRandomButton.addEventListener('click', showRandom)
 makeNewButton.addEventListener('click', makeNew)
 homeButton.addEventListener('click', goHome)
-
+saveCoverButton.addEventListener('click', goSave)
+viewSaveButton.addEventListener('click', goSave)
 
 // // Create your event handlers and other functions here 👇
 
@@ -72,4 +77,15 @@ function goHome() {
   saveCoverButton.classList.remove('hidden');
 
 }
+
+function goSave() {
+  savePage.classList.remove("hidden");
+  mainCover.classList.add("hidden");
+  makeNewForm.classList.add("hidden");
+  showRandomButton.classList.add("hidden");
+  homeButton.classList.remove('hidden');
+  saveCoverButton.classList.remove('hidden');
+
+}
+
 showRandom()
