@@ -20,6 +20,7 @@ var savedCovers = [
   new Cover(covers[getRandomIndex(covers)], "Sunsets and Sorrows", "sunsets", "sorrows")
 ];
 var currentCover;
+var coverCounter = 0
 
 
 
@@ -27,7 +28,7 @@ var currentCover;
 showRandomButton.addEventListener('click', showRandom)
 makeNewButton.addEventListener('click', makeNew)
 homeButton.addEventListener('click', goHome)
-saveCoverButton.addEventListener('click', goSave)
+saveCoverButton.addEventListener('click', storeCover)
 viewSaveButton.addEventListener('click', goSave)
 createBookButton.addEventListener('click', createNew)
 // // Create your event handlers and other functions here 👇
@@ -64,6 +65,7 @@ function getRandomIndex(array) {
 }
 
 function makeNew() {
+  savePage.classList.add("hidden");
   mainCover.classList.add("hidden");
   makeNewForm.classList.remove("hidden");
   showRandomButton.classList.add("hidden");
@@ -72,6 +74,7 @@ function makeNew() {
 }
 
 function goHome() {
+  savePage.classList.add("hidden");
   mainCover.classList.remove("hidden");
   makeNewForm.classList.add("hidden");
   showRandomButton.classList.remove("hidden");
@@ -88,7 +91,37 @@ function goSave() {
   homeButton.classList.remove('hidden');
   saveCoverButton.classList.remove('hidden');
 
+  for(coverCounter; coverCounter < savedCovers.length; coverCounter++) {
+    var newSection = document.createElement('section')
+    var img = document.createElement('img')
+    newSection.appendChild(img)
+    newSection.classList.add('mini-cover')
+    savedCoversSection.appendChild(newSection)
+    img.classList.add('mini-cover')
+    img.src = savedCovers[coverCounter].cover
+    var h2 = document.createElement('h2')
+    newSection.appendChild(h2)
+    h2.classList.add('cover-title')
+    h2.innerText = savedCovers[coverCounter].title
+    var h3 = document.createElement('h3')
+    newSection.appendChild(h3)
+    h3.classList.add('tagline')
+    h3.innerHTML = `A tale of <span class="tagline-1">${savedCovers[coverCounter].tagline1}</span> and <span class="tagline-2">${savedCovers[coverCounter].tagline2}</span>`
+
+  }
 }
+
+function storeCover() {
+  if(savedCovers.includes(currentCover) === false) {
+    savedCovers.push(currentCover)
+    goSave()
+  }
+  console.log(savedCoversSection)
+
+}
+
+
+
 
 function createNew() {
   event.preventDefault()
